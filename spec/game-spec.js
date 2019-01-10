@@ -29,6 +29,12 @@ describe('Game', function(){
     game.rumor();
     expect(enemy).toEqual(this.enemy1);
   });
+  
+  it('should increase the characters number of drinks consumed', function(){
+    let game = new Game("Stassi");
+    game.rumor();
+    expect(enemy).toEqual(this.enemy1);
+  });
 
 
 

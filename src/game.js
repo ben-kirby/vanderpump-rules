@@ -19,6 +19,19 @@ class Game {
       }
   }
 
+
+  talkToCrowd(attendee){
+    //talk to them
+    this.rumor.strength += this.crowd.;
+
+    pop(this.crowd.attendees.indexOf(attendee));
+  }
+
+
+
+}
+
+
 export { Game };
 
 class Rumor {
@@ -30,14 +43,22 @@ class Rumor {
 }
 
 class Crowd {
-  constructor(name){
+  constructor(){
+    const tom = {}
+
+    this.attendees = [tom, othertom, ]
+
+
+
+
+
     this.attendees = [
       {
         name: "Tom Sandoval",
         socialInfluence: 6,
         drinkInfluence: 9
       },
-      
+
       {
         name: "Tom Schwartz",
         socialInfluence: 4,
@@ -75,4 +96,6 @@ class Crowd {
       }
     ];
   }
+
+
 }
