@@ -34,9 +34,8 @@ class Game {
   alterCrowd(personTalkedTo){
     let index = this.crowd.crowdList.indexOf(personTalkedTo["name"]);
     if (index > -1){
-      this.crowd.crowdList.splice(index, 1)
+      this.crowd.crowdList.splice(index, 1 )
     }
-    console.log(this.crowd.crowdList);
   }
 }
 
@@ -93,6 +92,6 @@ class Crowd {
   }
 }
 
-
-
+export { Crowd };
+export { Rumor };
 export { Game };

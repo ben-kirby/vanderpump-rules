@@ -1,8 +1,13 @@
-// import { Game } from './game'
-//
-//
-// newGame = new Game;
-//
-// // userCharacter.characterSelector();
-// //
-// // newGame.battle(userCharacter);
+import { Game } from './game'
+import $ from 'jquery';
+
+$(document).ready(function(){
+  $(".game-form").submit(function(event){
+    event.preventDefault();
+    debugger;
+    let character = $("#characters").val();
+    let game = new Game(character);
+    $("#character-name").html();
+  });
+
+});
