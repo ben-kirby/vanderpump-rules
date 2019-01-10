@@ -7,88 +7,83 @@ class Game {
     this.character = new Character(name);
     this.enemy1 = new Enemy(this.character.enemies[0]);
     this.enemy2 = new Enemy(this.character.enemies[1]);
-    this.rumor = new Rumor();
+    this.rumor;
     this.crowd = new Crowd();
   }
 
-
-
-  rumorMill(){
-      if (this.enemy1.rumorDifficulty >= this.rumor.strength) {
-
-      }
+  createRumor(rumor){
+    this.rumor = new Rumor(rumor)
   }
-
 
   talkToCrowd(attendee){
-    //talk to them
-    this.rumor.strength += this.crowd.;
+    const personTalkedTo = this.findAttendee(attendee);
+    this.rumor.strength += personTalkedTo.socialInfluence;
+    this.character.drinksConsumed += personTalkedTo.drinkInfluence;
+    debugger;
+    this.alterCrowd(personTalkedTo);
+  };
 
-    pop(this.crowd.attendees.indexOf(attendee));
+  findAttendee(attendee){
+    for (var i = 0; i < this.crowd.attendees.length; i++) {
+      if (this.crowd.attendees[i]["name"] === attendee){
+        return this.crowd.attendees[i];
+      }
+    }
   }
 
-
-
+  alterCrowd(personTalkedTo){
+    let index = this.crowd.crowdList.indexOf(personTalkedTo["name"]);
+    if (index > -1){
+      this.crowd.crowdList.splice(index, 1)
+    }
+    console.log(this.crowd.crowdList);
+  }
 }
 
 
-export { Game };
 
 class Rumor {
-  constructor(){
+  constructor(rumor){
     this.strength = 0;
-    this.rumor = "";
+    this.rumor = rumor;
 
   }
 }
 
 class Crowd {
   constructor(){
-    const tom = {}
-
-    this.attendees = [tom, othertom, ]
-
-
-
-
-
+    this.crowdList = ["Tom Sandoval", "Tom Schwartz", "Ariana", "Scheena", "Katie", "Raquel", "Kristen"];
     this.attendees = [
       {
         name: "Tom Sandoval",
         socialInfluence: 6,
         drinkInfluence: 9
       },
-
       {
         name: "Tom Schwartz",
         socialInfluence: 4,
         drinkInfluence: 5
       },
-
       {
         name: "Ariana",
         socialInfluence: 7,
         drinkInfluence: 3
       },
-
       {
         name: "Scheena",
         socialInfluence: 1,
         drinkInfluence: 1
       },
-
       {
         name: "Katie",
         socialInfluence: 6,
         drinkInfluence: 3
       },
-
       {
         name: "Raquel",
         socialInfluence: 1,
         drinkInfluence: 1
       },
-
       {
         name: "Kristen",
         socialInfluence: 3,
@@ -96,6 +91,8 @@ class Crowd {
       }
     ];
   }
-
-
 }
+
+
+
+export { Game };
