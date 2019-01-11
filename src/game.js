@@ -17,10 +17,12 @@ class Game {
 
   talkToCrowd(attendee){
     const personTalkedTo = this.findAttendee(attendee);
-    this.rumor.strength += personTalkedTo.socialInfluence;
-    this.character.drinksConsumed += personTalkedTo.drinkInfluence;
-    debugger;
     this.alterCrowd(personTalkedTo);
+
+
+    this.character.drinksConsumed += personTalkedTo.drinkInfluence;
+    this.rumor.strength += ((personTalkedTo.socialInfluence * this.character.credibility)/this.character.drinksConsumed);
+
   };
 
   findAttendee(attendee){
@@ -34,10 +36,37 @@ class Game {
   alterCrowd(personTalkedTo){
     let index = this.crowd.crowdList.indexOf(personTalkedTo["name"]);
     if (index > -1){
-      this.crowd.crowdList.splice(index, 1 )
+      this.crowd.crowdList.splice(index, 1 );
     }
   }
+
+  findScore(){
+    if (this.rumor.strength > this.enemy1.rumorDifficulty){
+      if ((this.character.drinksConsumed >= (.5 * this.character.tolerance)) && (this.character.drinksConsumed <= (1.5 * this.character.tolerance))){
+        if (this.level === 3) {
+          return "Boss Level: You started a rumor about Lisa and got it to take off! Good Work!";
+        }
+        else {
+          this.level++;
+          this.character.tolerance += 10;
+          this.rumor.rumorReset();
+        }
+      }
+      else if (this.character.drinksConsumed >= (.5 * this.character.tolerance)){
+        return "You are a snooze at parties and you make for bad TV! You're fired!";
+      }
+      else if (this.character.drinksConsumed <= (1.5 * this.character.tolerance)){
+        return "You blacked out and we had to call you an Uber home!";
+      }
+    }
+    else {
+      return "Your rumor is not strong enough to beat your enemy!";
+    }
+  }
+
+
 }
+
 
 
 
@@ -47,6 +76,13 @@ class Rumor {
     this.rumor = rumor;
 
   }
+
+  rumorReset(){
+    this.strength = 0;
+    this.rumor = "";
+  }
+
+
 }
 
 class Crowd {

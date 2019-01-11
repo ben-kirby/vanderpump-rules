@@ -34,7 +34,7 @@ describe('Game', function(){
   it('should allow the character to talk to an attendee and it increasese the characters drinks consumed, and inscreases rumor strength', function(){
     game.createRumor("Jax is cheating on Brittany");
     game.talkToCrowd("Tom Sandoval");
-    expect(game.rumor.strength).toEqual(6);
+    expect(game.rumor.strength).toEqual(4.2);
     expect(game.character.drinksConsumed).toEqual(10);
   });
 
@@ -43,4 +43,17 @@ describe('Game', function(){
     game.talkToCrowd("Tom Sandoval");
     expect(game.crowd.crowdList.length).toEqual(6);
   });
+
+  it('should allow the character to talk to an attendee and removes that attendee from the list of people to talk to', function(){
+    game.createRumor("Jax is cheating on Brittany");
+    game.talkToCrowd("Tom Sandoval");
+    expect(game.rumor.strength).toEqual(4.2);
+  });
+
+  it('should return the outcome of the score ', function(){
+    game.createRumor("Jax is cheating on Brittany");
+    game.talkToCrowd("Tom Sandoval");
+    expect(game.findScore()).toEqual("Your rumor is not strong enough to beat your enemy!");
+  });
+
 });
