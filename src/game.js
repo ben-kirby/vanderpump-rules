@@ -1,5 +1,8 @@
 import { Character } from './character'
 import { Enemy } from './enemy'
+import { Crowd } from './crowd';
+import { Rumor } from './rumor';
+
 
 class Game {
   constructor(name){
@@ -18,8 +21,6 @@ class Game {
   talkToCrowd(attendee){
     const personTalkedTo = this.findAttendee(attendee);
     this.alterCrowd(personTalkedTo);
-
-
     this.character.drinksConsumed += personTalkedTo.drinkInfluence;
     this.rumor.strength += ((personTalkedTo.socialInfluence * this.character.credibility)/this.character.drinksConsumed);
 
@@ -63,71 +64,5 @@ class Game {
       return "Your rumor is not strong enough to beat your enemy!";
     }
   }
-
-
 }
-
-
-
-
-class Rumor {
-  constructor(rumor){
-    this.strength = 0;
-    this.rumor = rumor;
-
-  }
-
-  rumorReset(){
-    this.strength = 0;
-    this.rumor = "";
-  }
-
-
-}
-
-class Crowd {
-  constructor(){
-    this.crowdList = ["Tom Sandoval", "Tom Schwartz", "Ariana", "Scheena", "Katie", "Raquel", "Kristen"];
-    this.attendees = [
-      {
-        name: "Tom Sandoval",
-        socialInfluence: 6,
-        drinkInfluence: 9
-      },
-      {
-        name: "Tom Schwartz",
-        socialInfluence: 4,
-        drinkInfluence: 5
-      },
-      {
-        name: "Ariana",
-        socialInfluence: 7,
-        drinkInfluence: 3
-      },
-      {
-        name: "Scheena",
-        socialInfluence: 1,
-        drinkInfluence: 1
-      },
-      {
-        name: "Katie",
-        socialInfluence: 6,
-        drinkInfluence: 3
-      },
-      {
-        name: "Raquel",
-        socialInfluence: 1,
-        drinkInfluence: 1
-      },
-      {
-        name: "Kristen",
-        socialInfluence: 3,
-        drinkInfluence: 4
-      }
-    ];
-  }
-}
-
-export { Crowd };
-export { Rumor };
 export { Game };
